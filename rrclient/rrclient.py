@@ -3,6 +3,7 @@
 
 import zmq
 import uuid
+import os
 
 #  Prepare our context and sockets
 context = zmq.Context()
@@ -15,6 +16,6 @@ my_id = uuid.uuid1()
 
 #  Do 25 requests, waiting each time for a response
 for request in range(0,25):
-    socket.send(b"Hello #{} from {}".format(request, my_id))
+    socket.send("Hello #{} from {}".format(request, my_id).encode())
     message = socket.recv()
     print("Received reply %s [%s]" % (request, message))
